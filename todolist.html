@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            min-height: 100vh;
+           background: linear-gradient(135deg,#00e600,#000066);
+           padding: 10px;
+        }
+        .todolist h2{
+            text-align: center;
+        }
+        .row{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: lightgrey;
+            border-radius: 30px;
+        }
+        ul li{
+            list-style: none;
+            font-size: 17px;
+            padding: 18px 16px 12px 50px;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+        ul li::before{
+            content: '';
+            position:absolute;
+            height: 28px;
+            width: 28px;
+            background-size: cover;
+            background-image: url(https://tse1.mm.bing.net/th?id=OIP.cDC71JdlFO6fb2H85L2PcgHaHa&pid=Api&P=0&h=180);
+            background-position: left;
+            border-radius: 50%;
+            left:8px;
+            top:12px;
+            background-repeat: no-repeat;
+        }
+        .todolist{
+            background-color: white;
+            margin:100px auto 20px;
+            width: 100%;
+            max-width: 540px;
+            border-radius: 30px;
+            padding:40px 30px 70px;
+        }
+        input {
+            flex: 1;
+            outline: none;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            background:transparent;
+        }
+        button{
+            border: none;
+            outline: none;
+            padding: 16px 50px;
+            border-radius: 20px;
+            background-color: #000066;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+       ul li.checked{
+            color: #555;
+            text-decoration: line-through;
+        }
+        ul li.checked::before{
+            background-image: url(checklist.jpg);
+        }
+        ul li span{
+            position: absolute;
+            right: 0;
+            top:5px;
+            width: 40px;
+            height: 40px;
+            font-size: 22px;
+            color: #555;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+        }
+        ul li span:hover{
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <div class="todolist">
+            <h2 > ToDoList <img src="to-do-list-color-icon-vector-28812967.jpg" style="width: 20px;"></h2>
+            <div class="row">
+                <input type="text" placeholder="Enter Something" id="input-text">
+                <button type="submit" onclick="todolist()">Add</button>
+            </div><br>
+            <hr>
+            <ul  id="mylist">
+              <!-- <li class="checked">task1 </li>  -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        const inputtext = document.getElementById("input-text");
+        const mylistitem = document.getElementById("mylist");
+        function todolist(){
+            if(inputtext.value=="")
+            {
+                alert("you write something!");
+            }
+            else{
+                let list = document.createElement("li");
+                list.innerHTML = inputtext.value;
+                mylistitem.appendChild(list);
+                let span = document.createElement("span");
+                span.innerHTML = '&#10007;';
+                list.appendChild(span);
+            }
+            inputtext.value="";
+        }
+        mylistitem.addEventListener("click",function(s){
+            if(s.target.tagName === "LI"){
+                s.target.classList.toggle("checked");
+            }
+            else if(s.target.tagName === "SPAN"){
+                s.target.parentElement.remove();
+            }
+        },false);
+    </script>
+</body>
+</html>
